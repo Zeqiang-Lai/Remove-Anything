@@ -92,7 +92,7 @@ class LaMa:
 
     def __call__(self, image, mask):
         image = norm_img(image)
-        mask = norm_img(mask)[:,:,0:1]
+        mask = norm_img(mask)
 
         origin_height, origin_width = image.shape[:2]
         pad_image = pad_img_to_modulo(
