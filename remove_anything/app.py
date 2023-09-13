@@ -56,14 +56,15 @@ INPAINTERS = dict(
 def predict(inputs):
     image = inputs["image"].convert("RGB")
     mask = inputs["mask"].convert("L")
-    image_size = image.size
 
-    image = np.array(image)
-    mask = np.array(mask)
-
+    image = np.array(image).astype('float32') / 255
+    mask = np.array(mask).astype('float32')[:,:,None] / 255
+    mask[mask < 0.5] = 0
+    mask[mask >= 0.5] = 1
+    
     output = inpainter(image, mask)
 
-    output = Image.fromarray(output).resize(image_size)
+    output = Image.fromarray(output)
     return output
 
 

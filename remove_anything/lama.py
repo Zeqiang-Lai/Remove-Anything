@@ -3,13 +3,6 @@ import numpy as np
 from typing import Optional
 
 
-def norm_img(np_img):
-    if len(np_img.shape) == 2:
-        np_img = np_img[:, :, np.newaxis]
-    np_img = np_img.astype("float32") / 255
-    return np_img
-
-
 def ceil_modulo(x, mod):
     if x % mod == 0:
         return x
@@ -70,6 +63,7 @@ class LaMa:
             .eval()
         )
 
+    @torch.no_grad()
     def forward(self, image, mask):
         """Input image and output image have same size
         image: [H, W, C] RGB
@@ -91,9 +85,6 @@ class LaMa:
         return cur_res
 
     def __call__(self, image, mask):
-        image = norm_img(image)
-        mask = norm_img(mask)
-
         origin_height, origin_width = image.shape[:2]
         pad_image = pad_img_to_modulo(
             image,

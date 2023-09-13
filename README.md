@@ -1,21 +1,18 @@
 # Remove Anything
 
+[![](https://img.shields.io/badge/%F0%9F%A4%97-HuggingFace%20Models-blue)](https://huggingface.co/aaronb/remove_anything )
+
 A python package that includes some SOTA inpainting models that does not require text. 
 
 - **Easy to use**: simple and unified API.
 - **Self contained**: each method is self contained in a file or directory, easy to copy to use.
 
-<a href="https://huggingface.co/aaronb/remove_anything">
-    <img alt="huggingface" src="https://img.shields.io/badge/%F0%9F%A4%97-HuggingFace%20Models-blue">
-</a>
 
-</br>
-
-| Original                  | Mask                 | LaMa                 | LDM                  |
-| ------------------------- | -------------------- | -------------------- | -------------------- |
-| ![](assets/original.jpeg) | ![](assets/mask.png) | ![](assets/lama.png) | ![](assets/lama.png) |
-| MAT                       | FCT                  |                      |                      |
-| ![](assets/original.jpeg) | ![](assets/mask.png) |                      |                      |
+| Original                  | Mask                 |                      |                     |
+| ------------------------- | -------------------- | -------------------- | ------------------- |
+| ![](assets/original.jpeg) | ![](assets/mask.png) |                      |                     |
+| MAT                       | FCT                  | LaMa                 | LDM                 |
+| ![](assets/original.jpeg) | ![](assets/mask.png) | ![](assets/lama.png) | ![](assets/ldm.png) |
 
 ## Install
 
@@ -39,7 +36,8 @@ python -m remove_anything.app --model lama --device cuda
 ```python
 from remove_anything import LaMa
 model = LaMa(ckpt_path='big-lama.pt', device='cuda')
-# image, mask is numpy array in the shape [H,W,3] and [H,W,1]
+# image: (numpy array) [H,W,3] datarange=(0,1)
+# mask: (numpy array) [H,W,1] datarange=(0,1)
 output = model(image, mask)
 ```
 
