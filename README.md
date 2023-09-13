@@ -12,7 +12,7 @@ A python package that includes some SOTA inpainting models that does not require
 
 | Original | Mask | LaMa | LDM | MAT | 
 | -- | -- | -- | --| --| 
-|![](assets/lama.png) | ![](assets/lama.png) |![](assets/lama.png) |![](assets/lama.png) |![](assets/lama.png) |
+|![](assets/original.jpeg) | ![](assets/mask.png) |![](assets/lama.png) |![](assets/lama.png) |![](assets/lama.png) |
 
 ## Install
 

@@ -102,7 +102,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Remove Anything')
     parser.add_argument('--ckpt', type=str, default=None, help='Checkpoint Path')
     parser.add_argument('--model', type=str, default='lama', choices=INPAINTERS.keys(), help='Model type')
-    parser.add_argument('--port', type=int, default=7860, help='Port')
+    parser.add_argument('--port', type=int, default=10086, help='Port')
     parser.add_argument('--ip', type=str, default='0.0.0.0', help='IP address')
     parser.add_argument('--device', type=str, default='cuda', help='Device')
     args = parser.parse_args()
