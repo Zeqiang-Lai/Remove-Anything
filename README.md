@@ -10,9 +10,11 @@ A python package that includes some SOTA inpainting models that does not require
 - **Self contained**: each method is self contained in a file or directory, easy to copy to use.
 
 
-| Original | Mask | LaMa | LDM | MAT | 
-| -- | -- | -- | --| --| 
-|![](assets/original.jpeg) | ![](assets/mask.png) |![](assets/lama.png) |![](assets/lama.png) |![](assets/lama.png) |
+| Original                  | Mask                 | LaMa                 | LDM                  |
+| ------------------------- | -------------------- | -------------------- | -------------------- |
+| ![](assets/original.jpeg) | ![](assets/mask.png) | ![](assets/lama.png) | ![](assets/lama.png) |
+| MAT                  | FCT                 |                  |                   |
+| ![](assets/original.jpeg) | ![](assets/mask.png) | |  |
 
 ## Install
 
