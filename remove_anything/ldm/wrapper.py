@@ -32,7 +32,7 @@ def make_batch(image, mask, device):
     return batch
 
 
-class LDMInpainter:
+class LDM:
     def __init__(self, ckpt_path, device=torch.device("cuda"), ddim_steps=50):
         config = OmegaConf.load(os.path.join(CURRENT_DIR, "config.yaml"))
         model = instantiate_from_config(config.model)

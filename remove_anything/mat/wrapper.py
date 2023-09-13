@@ -17,7 +17,7 @@ def make_batch(image, mask, device):
     return image, mask
 
 
-class MATInpainter:
+class MAT:
     def __init__(self, resolution, ckpt_path, device, truncation_psi=1):
         print(f'Loading networks from: {ckpt_path}')
         net_res = 512 if resolution > 512 else resolution

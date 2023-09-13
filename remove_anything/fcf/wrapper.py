@@ -22,7 +22,7 @@ def make_batch(image, mask, device):
     return image, mask
 
 
-class FCFInpainter:
+class FCF:
     def __init__(self, ckpt_path, device, resolution=512, truncation_psi=1):
         print('Loading networks from "%s"...' % ckpt_path)
         
