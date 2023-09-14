@@ -1,8 +1,8 @@
 # Remove Anything
 
 [![](https://img.shields.io/badge/%F0%9F%A4%97-HuggingFace%20Models-blue)](https://huggingface.co/aaronb/remove_anything )
-<!-- [![](https://img.shields.io/badge/%F0%9F%A4%97-HuggingFace%20Demo-lightgrey)](https://huggingface.co/aaronb/remove_anything ) -->
 [![](https://img.shields.io/pypi/v/remove-anything)](https://pypi.org/project/remove-anything/)
+<!-- [![](https://img.shields.io/badge/%F0%9F%A4%97-HuggingFace%20Demo-lightgrey)](https://huggingface.co/aaronb/remove_anything ) -->
 
 
 A python package that includes some SOTA inpainting models that does not require text. 
@@ -15,7 +15,7 @@ A python package that includes some SOTA inpainting models that does not require
 | ------------------------- | -------------------- | -------------------- | ------------------- |
 | ![](assets/original.jpeg) | ![](assets/mask.png) |                      |                     |
 | MAT                       | FCT                  | LaMa                 | LDM                 |
-| ![](assets/mat.jpeg) | ![](assets/fcf.png) | ![](assets/lama.png) | ![](assets/ldm.png) |
+| ![](assets/mat.png) | ![](assets/fcf.png) | ![](assets/lama.png) | ![](assets/ldm.png) |
 
 ## Install
 
