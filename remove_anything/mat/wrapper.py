@@ -1,16 +1,18 @@
 import numpy as np
 import torch
+import dola
 
 from .networks.mat import Generator
 
 
 def make_batch(image, mask, device):
-    image = image.astype(np.float32) / 255.0
+    image = image.astype(np.float32) * 2 - 1
     image = image[None].transpose(0, 3, 1, 2)
     image = torch.from_numpy(image).to(device)
 
-    mask = mask.astype(np.float32) / 255.0
-    mask = mask[None, None]
+    mask = mask.astype(np.float32)
+    mask = mask[None].transpose(0, 3, 1, 2)
+
     mask = 1-mask
     mask = torch.from_numpy(mask).to(device)
     
@@ -29,7 +31,7 @@ class MAT:
         
         
     @torch.no_grad()
-    def __call__(self, image, mask):
+    def forward(self, image, mask):
         device = self.device
         
         noise_mode = 'const'
@@ -41,7 +43,20 @@ class MAT:
         z = torch.from_numpy(np.random.randn(1, self.inpainter.z_dim)).to(device)
         label = torch.zeros([1, self.inpainter.c_dim], device=device)
         output = self.inpainter(image, mask, z, label, truncation_psi=self.truncation_psi, noise_mode=noise_mode)
-        output = (output.permute(0, 2, 3, 1) * 127.5 + 127.5).round().clamp(0, 255).to(torch.uint8)
-        output = output[0].cpu().numpy()
+        
+        predicted_image = torch.clamp((output + 1.0) / 2.0, min=0.0, max=1.0)
+        inpainted = predicted_image.cpu().numpy().transpose(0, 2, 3, 1)[0]
 
-        return output
+        return inpainted
+    
+    def __call__(self, image, mask):
+        origin_height, origin_width = image.shape[:2]
+        pad_image = dola.imresize(image, (512,512), mode='cubic')
+        pad_mask = dola.imresize(mask, (512,512), mode='nearest')
+        
+        result = self.forward(pad_image, pad_mask)
+        result = dola.imresize(result, (origin_height, origin_width), mode='cubic')
+
+        # result = result * (mask) + image * (1 - mask)
+        result = np.clip(result * 255, 0, 255).astype("uint8")
+        return result

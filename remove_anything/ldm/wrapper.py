@@ -72,12 +72,8 @@ class LDM:
             )
             x_samples_ddim = model.decode_first_stage(samples_ddim)
 
-            image = torch.clamp((batch["image"] + 1.0) / 2.0, min=0.0, max=1.0)
-            mask = torch.clamp((batch["mask"] + 1.0) / 2.0, min=0.0, max=1.0)
             predicted_image = torch.clamp((x_samples_ddim + 1.0) / 2.0, min=0.0, max=1.0)
-
-            inpainted = (1 - mask) * image + mask * predicted_image
-            inpainted = inpainted.cpu().numpy().transpose(0, 2, 3, 1)[0]
+            inpainted = predicted_image.cpu().numpy().transpose(0, 2, 3, 1)[0]
 
         return inpainted
 
@@ -89,6 +85,6 @@ class LDM:
         result = self.forward(pad_image, pad_mask)
         result = dola.imresize(result, (origin_height,origin_width), mode='cubic')
 
-        # result = result * mask + image * (1 - mask)
+        result = result * mask + image * (1 - mask)
         result = np.clip(result * 255, 0, 255).astype("uint8")
         return result
