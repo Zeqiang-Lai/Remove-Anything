@@ -15,12 +15,13 @@ A python package that includes some SOTA inpainting models that does not require
 | ------------------------- | -------------------- | -------------------- | ------------------- |
 | ![](assets/original.jpeg) | ![](assets/mask.png) |                      |                     |
 | MAT                       | FCT                  | LaMa                 | LDM                 |
-| ![](assets/original.jpeg) | ![](assets/mask.png) | ![](assets/lama.png) | ![](assets/ldm.png) |
+| ![](assets/mat.jpeg) | ![](assets/fcf.png) | ![](assets/lama.png) | ![](assets/ldm.png) |
 
 ## Install
 
 ```bash
 pip install remove_anything
+pip install git+https://github.com/Zeqiang-Lai/Remove-Anything.git
 ```
 
 ## Usage

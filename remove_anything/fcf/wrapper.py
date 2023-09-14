@@ -62,6 +62,6 @@ class FCF:
         result = self.forward(pad_image, pad_mask)
         result = dola.imresize(result, (origin_height,origin_width), mode='cubic')
 
-        # result = result * (1mask) + image * (1 - mask)
+        result = result * mask + image * (1 - mask)
         result = np.clip(result * 255, 0, 255).astype("uint8")
         return result

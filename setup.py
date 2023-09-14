@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name='remove_anything',
     packages=find_packages(),
-    version='0.0.1',
+    version='0.0.2',
     package_data={
         'remove_anything': [
             'mat/torch_utils/ops/bias_act.cpp',
