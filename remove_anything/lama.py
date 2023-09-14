@@ -85,6 +85,14 @@ class LaMa:
         return cur_res
 
     def __call__(self, image, mask):
+        """ Remove the content specified in mask
+
+            Args:
+                image (ndarray) : [H,W,3] in the range of 0 and 1
+                mask (ndarray) : [H,W,1] , 1 for masked region, 0 for other.
+        """
+        
+        
         origin_height, origin_width = image.shape[:2]
         pad_image = pad_img_to_modulo(
             image,
