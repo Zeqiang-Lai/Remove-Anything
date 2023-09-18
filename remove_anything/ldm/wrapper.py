@@ -13,7 +13,6 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(CURRENT_DIR)
 
 
-
 def make_batch(image, mask, device):
     image = image.astype(np.float32)
     image = image[None].transpose(0, 3, 1, 2)
@@ -79,11 +78,11 @@ class LDM:
 
     def __call__(self, image, mask):
         origin_height, origin_width = image.shape[:2]
-        pad_image = dola.imresize(image, (512,512), mode='cubic')
-        pad_mask = dola.imresize(mask, (512,512), mode='nearest')
-        
+        pad_image = dola.imresize(image, (512, 512), mode='cubic')
+        pad_mask = dola.imresize(mask, (512, 512), mode='nearest')
+
         result = self.forward(pad_image, pad_mask)
-        result = dola.imresize(result, (origin_height,origin_width), mode='cubic')
+        result = dola.imresize(result, (origin_height, origin_width), mode='cubic')
 
         result = result * mask + image * (1 - mask)
         result = np.clip(result * 255, 0, 255).astype("uint8")

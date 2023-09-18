@@ -1,16 +1,43 @@
 import gradio as gr
 import numpy as np
 from PIL import Image
+import cv2
 
 import remove_anything
+
+
+def cal_dilate_factor(mask):
+    area = mask[mask != 0].sum()
+    edge = cv2.Canny(mask, 30, 226)
+    perimeter = edge.sum()
+    ratio = 0
+    if perimeter > 0:
+        ratio = int(area * 0.55 / perimeter)
+    if ratio % 2 == 0:
+        ratio += 1
+    return ratio
+
+
+def dilate_mask(mask, dilate_factor=9):
+    # dilate mask
+    mask = mask.astype(np.uint8)
+    dilated_mask = cv2.dilate(mask, np.ones((dilate_factor, dilate_factor), np.uint8), iterations=1)
+
+    return dilated_mask
 
 
 def predict(inputs):
     image = inputs["image"].convert("RGB")
     mask = inputs["mask"].convert("L")
 
-    image = np.array(image).astype('float32') / 255
-    mask = np.array(mask).astype('float32')[:, :, None] / 255
+    image = np.array(image)
+    mask = np.array(mask)
+    
+    dilate_factor = cal_dilate_factor(mask)
+    mask = dilate_mask(mask, dilate_factor)
+    
+    image = image.astype('float32') / 255
+    mask = mask.astype('float32')[:, :, None] / 255
     mask[mask < 0.5] = 0
     mask[mask >= 0.5] = 1
 
